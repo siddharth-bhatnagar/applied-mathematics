@@ -1,0 +1,98 @@
+// This program takes input from the user and performs matrix addidtion, subtraction and multiplication.
+
+#include <stdio.h>
+int main()
+{
+    int r1, c1, r2, c2, a[100][100], b[100][100], sum[100][100], difference[100][100], mul[100][100], i, j, k;
+    printf("Enter the number of rows in matrix A(between 1 and 100): ");
+    scanf("%d", &r1);
+    printf("Enter the number of columns in matrix A (between 1 and 100): ");
+    scanf("%d", &c1);
+    printf("Enter the number of rows in matrix B(between 1 and 100): ");
+    scanf("%d", &r2);
+    printf("Enter the number of columns in matrix B (between 1 and 100): ");
+    scanf("%d", &c2);
+    printf("\nEnter elements of matrix A:\n");
+    for (i = 0; i < r1; ++i)
+        for (j = 0; j < c1; ++j)
+        {
+            printf("Enter element a%d%d: ", i + 1, j + 1);
+            scanf("%d", &a[i][j]);
+        }
+    printf("Enter elements of matrix B:\n");
+    for (i = 0; i < r2; ++i)
+        for (j = 0; j < c2; ++j)
+        {
+            printf("Enter element a%d%d: ", i + 1, j + 1);
+            scanf("%d", &b[i][j]);
+        }
+    // addition and subtraction of two matrices if possible
+    if (r1 == r2 && c1 == c2)
+    {
+        int r = r1;
+        int c = c1;
+        for (i = 0; i < r; ++i)
+            for (j = 0; j < c; ++j)
+            {
+                sum[i][j] = a[i][j] + b[i][j];
+                difference[i][j] = a[i][j] - b[i][j];
+            }
+        // printing the sum
+        printf("\nSum of two matrices: \n");
+        for (i = 0; i < r; ++i)
+            for (j = 0; j < c; ++j)
+            {
+                printf("%d   ", sum[i][j]);
+                if (j == c - 1)
+                {
+                    printf("\n\n");
+                }
+            }
+        // printing the difference
+        printf("\nDifference of two matrices: \n");
+        for (i = 0; i < r; ++i)
+            for (j = 0; j < c; ++j)
+            {
+                printf("%d   ", difference[i][j]);
+                if (j == c - 1)
+                {
+                    printf("\n\n");
+                }
+            }
+    }
+    else
+    {
+        printf("\nAdittion & Subtraction of the entered matrices is not possible. \n");
+    }
+
+    // matrix multiplication if possible
+    if (c1 == r2)
+    {   int r = r1; int c = c2;
+        for (i = 0; i < r; ++i)
+            for (j = 0; j < c; ++j)
+            {
+                mul[i][j] = 0;
+                for (k = 0; k < c; ++k)
+                {
+                    mul[i][j] += a[i][k] * b[k][j];
+                }
+            }
+         // printing the result of multiplication
+         printf("\nThe result of matrix multiplication is : \n");
+        for (i = 0; i < r; ++i)
+            for (j = 0; j < c; ++j)
+            {
+                printf("%d   ", mul[i][j]);
+                 if (j == c - 1)
+                {
+                    printf("\n\n");
+                }
+            }
+    }
+    else
+    {
+        printf("\nMatrix multiplication of the given matrices is not possible. ");
+    }
+    return 0;
+}
+
