@@ -1,0 +1,60 @@
+// This program solves linear simultaneous equations using gauss jacobi method
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int i, j, m, n, itr;
+    float x[10], a[10][10], d[10], c[10];
+    printf("\nEnter the number if equations : \n");                      // The number of simultaneous linear equations
+    scanf("%d", &n);
+    printf("\nEnter the number of iterations : \n");                     // Number of iterations
+    scanf("%d", &itr);
+    printf("\nEnter the right hand side constants : \n");                // The RHS constants
+    for (i = 0; i < n; i++)
+    {
+        scanf("%f", &d[i]);                                               // Storing the constants in array
+    }
+    printf("\nEnter the coefficients row wise : \n");                     // LHS coefficients
+    for (i = 0; i < n; i++)
+    {
+        x[i] = 0;
+        for (j = 0; j < n; j++)
+        {
+            scanf("%f", &a[i][j]);                                         // Storing them in a matrix
+            if (j == n - 1)
+                printf("\n");
+        }
+    }
+    m = 1;
+line:                                                                       // A label to which the program returns to
+    for (i = 0; i < n; i++)
+    {
+        c[i] = d[i];
+        for (j = 0; j < n; j++)
+        {
+            if (i != j)
+            {
+                c[i] = c[i] - a[i][j] * x[j];
+            }
+        }
+    }
+    for (i = 0; i < n; i++)
+    {
+        x[i] = c[i] / a[i][i];
+    }
+    m++;
+    if (m <= itr)
+    {
+        goto line;
+    }
+    else
+    {
+        printf("\nThe Solution is : \n");
+        for (i = 0; i < n; i++)
+        {
+            printf("\nx(%d) = %f\n", i, x[i]);
+        }
+    }
+}
